@@ -1,0 +1,22 @@
+{
+  "name": "curkel-db",
+  "version": "1.0.0",
+  "description": "An authenticated key-value stored.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ads",
+    "merkle"
+  ],
+  "author": "chase",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypto": "^3.0.2",
+    "npm": "^6.8.0"
+  }
+}

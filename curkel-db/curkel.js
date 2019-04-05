@@ -1,0 +1,172 @@
+'use strict';
+
+const bcrypto = require('bcrypto');
+const {SHA256} = bcrypto;
+const optimized = require('urkel/optimized');
+
+//const {SHA256} = bcrypto;
+const {Tree, Proof} = optimized;
+
+
+const DATABASE_PATH = './db/';
+
+
+/*
+
+class Curkel {
+
+/*
+Drop a table
+*/
+
+
+
+/*
+Config file
+*/
+//
+
+/*
+Create or load index, name
+Return snapshot
+*/
+async function load(index) {
+  const tree = new Tree(SHA256, 256, DATABASE_PATH + index);
+  try {
+    await tree.open();
+  } catch (err) {
+    console.log("Database already open")
+  }
+  return tree
+}
+
+/*
+Checkout index
+(make transaction)
+return transaction
+*/
+async function checkout(index) {
+  const transaction = await index.transaction();
+  return transaction;
+}
+
+
+/*
+Commit (index)
+Return root, snapshot
+*/
+async function commit(index, transaction) {
+  const root = await transaction.commit();
+  const snapshot = await index.snapshot(root);
+  return {root, snapshot}
+}
+
+/*
+Write (index, tx)
+Return bool true, false
+*/
+async function close(index) {
+  await index.close()
+}
+
+/*
+Get (index, key)
+Returns Proof of inclusion, root
+*/
+async function get(index, key) {
+  const p = await proofOfInclusion(index, key)
+  const value = await index.get(key)
+  return {value, p}
+}
+
+/*
+Put (index, key, value)
+Can return proof of inclusion, root
+*/
+async function put(index, transaction, key, value) {
+  await transaction.insert(key, value);
+  const {root, snapshot} = await commit(index, transaction)
+  const p = await proofOfInclusion(snapshot, key)
+  return {root, p}
+}
+
+/*
+Update (index, key, value)
+Returns proof of update, root
+*/
+async function update(index, transaction, key, value) {
+  return await put(transaction, key, value)
+}
+
+/*
+Remove (index, key)
+//TODO this does not completely offer the proof
+Returns Proof of update, root
+*/
+async function del(index, transaction, key) {
+  return await update(index, transaction, key, 0)
+}
+
+/*
+*/
+async function verify(proof, root, key) {
+  const [code, value] = proof.verify(root, key, SHA256, 256);
+  //Proof inclusion of the key
+  if (code !== 0) {
+    console.log('Could not verify proof: %s.', Proof.code(code));
+    return 0;
+  }
+
+  if (value) {
+    console.log('Valid proof for %s: %s',
+      key.toString('hex'), value.toString('hex'));
+      return 1;
+  } else {
+    console.log('Absence proof for %s.', key.toString('hex'));
+    return 0;
+  }
+}
+
+/*
+reduces the size of the db
+*/
+async function compaction(tree) {
+  tree.compact();
+  return true;
+}
+
+/*
+async function range(start, finish) {
+
+}
+*/
+
+
+/*
+Returns an iterator over a stream
+*/
+async function iterator(tree) {
+  return await tree.iterator();
+}
+
+/*
+Proof of inclusion
+*/
+async function proofOfInclusion(snapshot, key) {
+  const proof = await snapshot.prove(key);
+  return proof;
+}
+
+
+module.exports = {
+  verify,
+  del,
+  update,
+  put,
+  get,
+  load,
+  checkout,
+  commit,
+  iterator,
+  close
+}
