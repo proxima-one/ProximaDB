@@ -4,16 +4,16 @@
 This is an implementation of the Urkel Tree. This is a specific database api.
 
 ## Installation
-'''
+```
 npm install curkel-db
-'''
+```
 
 ## Use 
 This package can be used as follows: 
 
-'''
+```
 const Curkel = require('curkel-db')
-'''
+```
 
 ## API
 
