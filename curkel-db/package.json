@@ -1,6 +1,6 @@
 {
   "name": "curkel-db",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "description": "An authenticated key-value stored.",
   "main": "index.js",
   "directories": {

@@ -16,6 +16,7 @@ async function setup(indexName) {
 
 async function teardown(indexName, index) {
   mapping[indexName] = index;
+  //await Curkel.close(index);
 }
 
 async function get(indexName, key) {
@@ -23,6 +24,20 @@ async function get(indexName, key) {
   const {value, p} = await Curkel.get(index, key);
   await teardown(indexName, index);
   return {value, p}
+}
+
+async function range(indexName, start, finish) {
+  const index = await setup(indexName);
+  const values = await Curkel.range(index, start, finish);
+  await teardown(indexName, index);
+  return values
+}
+
+async function filter(indexName, pred) {
+  const index = await setup(indexName);
+  const values = await Curkel.filter(index, pred);
+  await teardown(indexName, index);
+  return values
 }
 
 
@@ -51,7 +66,9 @@ async function create(indexName) {
 
 module.exports = {
   create,
+  filter,
   del,
+  range,
   put,
   get
 }

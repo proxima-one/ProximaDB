@@ -11,10 +11,10 @@ const {Tree, Proof} = optimized;
 const DATABASE_PATH = './db/';
 
 
+
 /*
-
 class Curkel {
-
+*/
 /*
 Drop a table
 */
@@ -135,11 +135,42 @@ async function compaction(tree) {
   return true;
 }
 
-/*
-async function range(start, finish) {
 
+async function range(index, start, finish) {
+  const iter = index.iterator();
+  var count = 0;
+  var array = new Array();
+  while (await iter.next()) {
+    if (count <= finish && count >= start) {
+      const {key, value} = iter;
+      //console.log('Iterated over item:');
+      //console.log('%s: %s', key, value.toString('hex'));
+      var proof = await proofOfInclusion(index, key)
+      array.push({value: value, proof: proof});
+    }
+    count++;
+  }
+  console.log(array)
+  return array
 }
-*/
+
+
+async function filter(index, pred) {
+  const iter = index.iterator();
+  var array = new Array();
+  while (await iter.next()) {
+      const {key, value} = iter;
+      if (pred(key, value)) {
+      //console.log('%s: %s', key, value.toString('hex'));
+        var proof = await proofOfInclusion(index, key)
+        array.push({value: value, proof: proof});
+      }
+
+  }
+  console.log(array)
+  return array
+}
+
 
 
 /*
@@ -163,7 +194,9 @@ module.exports = {
   del,
   update,
   put,
+  filter,
   get,
+  range,
   load,
   checkout,
   commit,
