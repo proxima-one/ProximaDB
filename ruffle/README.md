@@ -36,8 +36,18 @@ let value = {
 ruffle.put(transactions, key, value)
 ```
 
+```console
+
+```
+
+
 ```javascript
 ruffle.get(transactions, key)
+```
+
+
+```console
+
 ```
 
 
@@ -46,6 +56,11 @@ let pred = {
   account: "key"
 }
 ruffle.filter(transactions, pred)
+```
+
+
+```console
+
 ```
 
 
