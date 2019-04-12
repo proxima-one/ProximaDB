@@ -27,6 +27,19 @@ let schema = {
 var transactions = ruffle.create(table, schema)
 ```
 
+Load table for transactions
+```javascript
+let table = "transactions"
+let schema = {
+  id: 'string',
+  from: 'string',
+  to: 'string',
+  amount: 'uint'
+}
+var transactions = ruffle.create(table, schema)
+```
+
+Put new items into the table
 ```javascript
 let key = 'id'
 let transaction = {
@@ -39,18 +52,16 @@ ruffle.put(transactions, key, value)
 ```
 
 The put command returns a proof and value, or an error.
-
 ```console
 Proof {
 
 }
 ```
 
-
+Get item from the table
 ```javascript
 ruffle.get(transactions, key)
 ```
-
 
 ```console
 
@@ -72,7 +83,10 @@ ruffle.filter(transactions, pred)
 
 ## Documentation
 
-### Create
+
+### CRUD Operations
+
+#### Create
 
 | name  |  type |  description  
 |---    |---    |     ---         |
@@ -90,7 +104,7 @@ let schema = {
 var transactions = ruffle.create(table, schema)
 ```
 
-### Put
+#### Put
 
 | name  |  type |  description  
 |---    |---    |     ---         |
@@ -111,7 +125,7 @@ ruffle.put(transactions, key, value)
 ```
 
 
-### Get
+#### Get
 | name  |  type |  description  
 |---    |---    |     ---         |
 |  table | string  |  name of the table |
@@ -124,7 +138,7 @@ ruffle.get(transactions, key)
 ```
 
 
-### Del(table, key)
+#### Remove
 
 | name  |  type |  description  
 |---    |---    |     ---         |
@@ -134,12 +148,20 @@ ruffle.get(transactions, key)
 
 Deletes the value associated with the key at the designated table.
 
+### Verification
 
-## Filtering, Aggregating and Mapping
+
+## Filters, Aggregates, Maps, and Groups
+
+
+#### Filter 
+
 
 
 ```javascript
-{filter}
+let filter = {
+  name: "value"
+}
 ruffle.filter(transactions, ...)
 ```
 
@@ -147,3 +169,19 @@ ruffle.filter(transactions, ...)
 ```console
 
 ```
+
+
+## Future Work
+
+
+
+
+
+
+
+
+
+
+
+
+
