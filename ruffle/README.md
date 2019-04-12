@@ -7,37 +7,43 @@
 npm install ruffle
 ```
 
-## Usage
+## Example Usage
 
+Importing 
 ```javascript
 const Ruffle = require('./ruffle')
-```
-
-```javascript
 var ruffle = new Ruffle()
 ```
 
+Creating a table for transactions
 ```javascript
 let table = "transactions"
 let schema = {
-  balance: 'uint'
-  account: 'string'
+  id: 'string',
+  from: 'string',
+  to: 'string',
+  amount: 'uint'
 }
 var transactions = ruffle.create(table, schema)
 ```
 
-
 ```javascript
-let key = 'key'
-let value = {
-  account: key,
-  value: 1000
+let key = 'id'
+let transaction = {
+  id: key,
+  from: 'address1',
+  to: 'address2',
+  amount: 20000
 }
 ruffle.put(transactions, key, value)
 ```
 
-```console
+The put command returns a proof and value, or an error.
 
+```console
+Proof {
+
+}
 ```
 
 
