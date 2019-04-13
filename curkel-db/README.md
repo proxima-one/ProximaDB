@@ -20,6 +20,7 @@ const Curkel = require('curkel-db')
 
 ### Create(tableName)
 ```javascript
+Curkel.create(tableName)
 ```
 | name  |  type |  description  
 |---    |---    |     ---         |
