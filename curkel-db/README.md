@@ -28,7 +28,7 @@ Curkel.create(tableName)
 
 This creates a table with name, tableName, and returns a confirmation boolean if correct.
 
-### Put(tableName, key, value)
+### Put
 
 ```javascript
 Curkel.put(tableName, key, value)
@@ -42,7 +42,7 @@ Curkel.put(tableName, key, value)
 
 This operation does a put, and returns a proof.
 
-### Get(tableName, key)
+### Get
 ```javascript
 Curkel.get(tableName, key)
 ```
@@ -53,7 +53,7 @@ Curkel.get(tableName, key)
 
 Gets a value corresponding to the key, within the tableName.
 
-### Del(tableName, key)
+### Del
 ```javascript
 Curkel.del(tableName, key)
 ```
