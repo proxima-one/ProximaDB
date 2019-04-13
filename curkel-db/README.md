@@ -51,7 +51,8 @@ This operation does a put, and returns a proof.
 Gets a value corresponding to the key, within the tableName.
 
 ### Del(tableName, key)
-
+```javascript
+```
 | name  |  type |  description  
 |---    |---    |     ---         |
 |  tableName | string  |  name of the table |
