@@ -11,20 +11,28 @@ npm install curkel-db
 ## Use 
 This package can be used as follows: 
 
-```
+```javascript
 const Curkel = require('curkel-db')
 ```
 
-## API
 
-### Create(tableName)
+## API Documentation
+
+### Create a table
+```javascript
+Curkel.create(tableName)
+```
 | name  |  type |  description  
 |---    |---    |     ---         |
 |  tableName | string  |  name of the table |
 
 This creates a table with name, tableName, and returns a confirmation boolean if correct.
 
-### Put(tableName, key, value)
+### Put
+
+```javascript
+Curkel.put(tableName, key, value)
+```
 
 | name  |  type |  description  
 |---    |---    |     ---         |
@@ -34,7 +42,10 @@ This creates a table with name, tableName, and returns a confirmation boolean if
 
 This operation does a put, and returns a proof.
 
-### Get(tableName, key)
+### Get
+```javascript
+Curkel.get(tableName, key)
+```
 | name  |  type |  description  
 |---    |---    |     ---         |
 |  tableName | string  |  name of the table |
@@ -42,8 +53,10 @@ This operation does a put, and returns a proof.
 
 Gets a value corresponding to the key, within the tableName.
 
-### Del(tableName, key)
-
+### Del
+```javascript
+Curkel.del(tableName, key)
+```
 | name  |  type |  description  
 |---    |---    |     ---         |
 |  tableName | string  |  name of the table |

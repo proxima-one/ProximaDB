@@ -7,41 +7,64 @@
 npm install ruffle
 ```
 
-## Usage
+## Example Usage
 
+Importing 
 ```javascript
 const Ruffle = require('./ruffle')
-```
-
-```javascript
 var ruffle = new Ruffle()
 ```
 
+Creating a table for transactions
 ```javascript
 let table = "transactions"
 let schema = {
-  balance: 'uint'
-  account: 'string'
+  id: 'string',
+  from: 'string',
+  to: 'string',
+  amount: 'uint'
 }
 var transactions = ruffle.create(table, schema)
 ```
 
-```console
-
+Load table for transactions
+```javascript
+let table = "transactions"
+let schema = {
+  id: 'string',
+  from: 'string',
+  to: 'string',
+  amount: 'uint'
+}
+var transactions = ruffle.create(table, schema)
 ```
 
-
+Put key into db
 ```javascript
-let key = 'key'
-let value = {
-  account: key,
-  value: 1000
+let key = 'id'
+let transaction = {
+  id: key,
+  from: 'address1',
+  to: 'address2',
+  amount: 20000
 }
 ruffle.put(transactions, key, value)
 ```
 
+The put command returns a proof and value, or an error.
+```console
+Proof {
+
+}
+```
+
+Get item from the table
 ```javascript
 ruffle.get(transactions, key)
+```
+
+```console
+
 ```
 
 
@@ -53,9 +76,17 @@ ruffle.filter(transactions, pred)
 ```
 
 
+```console
+
+```
+
+
 ## Documentation
 
-### Create
+
+### CRUD Operations
+
+#### Create
 
 | name  |  type |  description  
 |---    |---    |     ---         |
@@ -73,7 +104,7 @@ let schema = {
 var transactions = ruffle.create(table, schema)
 ```
 
-### Put
+#### Put
 
 | name  |  type |  description  
 |---    |---    |     ---         |
@@ -94,7 +125,7 @@ ruffle.put(transactions, key, value)
 ```
 
 
-### Get
+#### Get
 | name  |  type |  description  
 |---    |---    |     ---         |
 |  table | string  |  name of the table |
@@ -107,7 +138,7 @@ ruffle.get(transactions, key)
 ```
 
 
-### Del(table, key)
+#### Remove
 
 | name  |  type |  description  
 |---    |---    |     ---         |
@@ -117,16 +148,40 @@ ruffle.get(transactions, key)
 
 Deletes the value associated with the key at the designated table.
 
+### Verification
 
-## Filtering, Aggregating and Mapping
+
+## Filters, Aggregates, Maps, and Groups
+
+
+#### Filter 
+
 
 
 ```javascript
-{filter}
-ruffle.filter(transactions, ...)
+let filter = [{
+ name: "name", expression: "=", value: "hello"
+}]
+ruffle.filter(transactions, filter)
 ```
 
 
 ```console
 
 ```
+
+
+## Future Work
+
+
+
+
+
+
+
+
+
+
+
+
+
