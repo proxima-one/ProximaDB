@@ -31,6 +31,7 @@ This creates a table with name, tableName, and returns a confirmation boolean if
 ### Put(tableName, key, value)
 
 ```javascript
+Curkel.put(tableName, key, value)
 ```
 
 | name  |  type |  description  
