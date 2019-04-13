@@ -18,7 +18,7 @@ const Curkel = require('curkel-db')
 
 ## API
 
-### Create(tableName)
+### Create a table
 ```javascript
 Curkel.create(tableName)
 ```
