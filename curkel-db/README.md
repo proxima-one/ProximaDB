@@ -19,6 +19,8 @@ const Curkel = require('curkel-db')
 ## API
 
 ### Create(tableName)
+```javascript
+```
 | name  |  type |  description  
 |---    |---    |     ---         |
 |  tableName | string  |  name of the table |
