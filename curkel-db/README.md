@@ -44,6 +44,7 @@ This operation does a put, and returns a proof.
 
 ### Get(tableName, key)
 ```javascript
+Curkel.get(tableName, key)
 ```
 | name  |  type |  description  
 |---    |---    |     ---         |
