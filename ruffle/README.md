@@ -159,10 +159,10 @@ Deletes the value associated with the key at the designated table.
 
 
 ```javascript
-let filter = {
-  name: "value"
-}
-ruffle.filter(transactions, ...)
+let filter = [{
+ name: "name", expression: "=", value: "hello"
+}]
+ruffle.filter(transactions, filter)
 ```
 
 
