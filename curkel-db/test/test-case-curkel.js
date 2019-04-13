@@ -36,7 +36,7 @@ async function main() {
   n = unpack(n.toString(), 16)
 
   const arr = await Curkel.filter("new_index", (key, value) => {
-    return key.equals(n);
+    return key < n || key.equals(n);
   });
 
 }

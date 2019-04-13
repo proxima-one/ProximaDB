@@ -26,6 +26,10 @@ let schema = {
 var transactions = ruffle.create(table, schema)
 ```
 
+```console
+
+```
+
 
 ```javascript
 let key = 'key'

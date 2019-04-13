@@ -161,11 +161,9 @@ async function filter(index, pred) {
   while (await iter.next()) {
       const {key, value} = iter;
       if (pred(key, value)) {
-      //console.log('%s: %s', key, value.toString('hex'));
         var proof = await proofOfInclusion(index, key)
         array.push({value: value, proof: proof});
       }
-
   }
   console.log(array)
   return array
