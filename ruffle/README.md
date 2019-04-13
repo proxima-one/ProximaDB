@@ -114,7 +114,6 @@ var transactions = ruffle.create(table, schema)
 
 This operation does a put, and returns a proof.
 
-
 ```javascript
 let key = '.....'
 let value = {
