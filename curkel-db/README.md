@@ -27,6 +27,9 @@ This creates a table with name, tableName, and returns a confirmation boolean if
 
 ### Put(tableName, key, value)
 
+```javascript
+```
+
 | name  |  type |  description  
 |---    |---    |     ---         |
 |  tableName | string  |  name of the table |
