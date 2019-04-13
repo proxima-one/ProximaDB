@@ -11,9 +11,10 @@ npm install curkel-db
 ## Use 
 This package can be used as follows: 
 
-```
+```javascript
 const Curkel = require('curkel-db')
 ```
+
 
 ## API
 
