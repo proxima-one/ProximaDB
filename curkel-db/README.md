@@ -55,6 +55,7 @@ Gets a value corresponding to the key, within the tableName.
 
 ### Del(tableName, key)
 ```javascript
+Curkel.del(tableName, key)
 ```
 | name  |  type |  description  
 |---    |---    |     ---         |
