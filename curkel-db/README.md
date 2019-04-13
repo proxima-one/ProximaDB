@@ -41,6 +41,8 @@ This creates a table with name, tableName, and returns a confirmation boolean if
 This operation does a put, and returns a proof.
 
 ### Get(tableName, key)
+```javascript
+```
 | name  |  type |  description  
 |---    |---    |     ---         |
 |  tableName | string  |  name of the table |
