@@ -153,8 +153,16 @@ Deletes the value associated with the key at the designated table.
 ## Filters, Aggregates, Maps, and Groups
 
 
-#### Filter 
 
+### Filter
+
+Each filter can be shown as a combination of three variables.
+
+| name  |  type |  description  
+|---    |---    |     ---         |
+|  name | string  |  name of the table |
+|  expression |  string |  key for the predicate type  |
+|  value |  integer, string, value type |  key for the value  |
 
 
 ```javascript
@@ -164,10 +172,12 @@ let filter = [{
 ruffle.filter(transactions, filter)
 ```
 
+#### Output
 
 ```console
 
 ```
+
 
 
 ## Future Work
