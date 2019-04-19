@@ -182,6 +182,14 @@ ruffle.filter(transactions, filter)
 
 ## Future Work
 
+Future work on this library: 
+
+- Schema Validation
+- Optimized range queries
+- Integrating mapping, and aggregation functions 
+- Query optimization
+- Addition of developer-based authenticated updates
+
 
 
 
