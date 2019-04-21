@@ -1,5 +1,5 @@
 {
-  "name": "ruffle",
+  "name": "ora-ruffle",
   "version": "1.0.0",
   "description": "Ruffle authenticated database",
   "main": "index.js",
