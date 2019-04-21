@@ -4,14 +4,14 @@
 
 ## Installation
 ```
-npm install ruffle
+npm install ora-ruffle
 ```
 
 ## Example Usage
 
 Importing 
 ```javascript
-const Ruffle = require('./ruffle')
+const Ruffle = require('ora-ruffle')
 var ruffle = new Ruffle()
 ```
 
