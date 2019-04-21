@@ -1,6 +1,6 @@
 
 
-
+const Ruffle = require('./ruffle.js');
 //validates against schema (later)
 
 //unpacks and packs values
@@ -19,4 +19,4 @@ Enforce schema ...
 */
 
 
-module.exports = Curkel
+module.exports = Ruffle

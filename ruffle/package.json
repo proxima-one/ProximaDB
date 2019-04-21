@@ -1,14 +1,13 @@
 {
-  "name": "curkel",
-  "version": "1.0.2",
-  "description": "Curkel Server-Client",
-  "main": "server.js",
+  "name": "ruffle",
+  "version": "1.0.0",
+  "description": "Ruffle authenticated database",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "curkel"
+    "ruffle"
   ],
   "author": "chase",
   "license": "ISC",
@@ -16,8 +15,6 @@
     "bcrypt": "^3.0.5",
     "bcrypto": "*",
     "curkel-db": "*",
-    "grpc": "*",
-    "urkel": "*",
-    "validate.js": "^0.12.0"
+    "events": "^3.0.0"
   }
 }
