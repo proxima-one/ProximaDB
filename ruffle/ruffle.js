@@ -17,7 +17,7 @@ class Ruffle extends EventEmitter {
   }
 
   async request(req) {
-    await this.transactionManager.requesting(request);
+    await this.transactionManager.requesting(req);
     let value = await once(this.transactionManager, JSON.stringify(blockRequest))
     return JSON.parse(value)
   }
@@ -45,7 +45,7 @@ class Ruffle extends EventEmitter {
       key: key,
       action: 'put',
       name: table,
-      value,
+      value: value,
       id: "ID"
     };
     await this.transactionManager.requesting(blockRequest);
