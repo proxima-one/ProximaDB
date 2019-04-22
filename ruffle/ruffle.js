@@ -16,6 +16,12 @@ class Ruffle extends EventEmitter {
 
   }
 
+  async request(req) {
+    await this.transactionManager.requesting(request);
+    let value = await once(this.transactionManager, JSON.stringify(blockRequest))
+    return JSON.parse(value)
+  }
+
   async get(table, key) {
     let blockRequest = {
       key: key,
@@ -23,8 +29,8 @@ class Ruffle extends EventEmitter {
       name: table,
       id: "ID"
     };
-    await transactionManager.requesting(blockRequest);
-    let value = await once(updater, JSON.stringify(blockRequest))
+    await this.transactionManager.requesting(blockRequest);
+    let value = await once(this.transactionManager, JSON.stringify(blockRequest))
     return JSON.parse(value)
   }
 
@@ -42,8 +48,8 @@ class Ruffle extends EventEmitter {
       value,
       id: "ID"
     };
-    await transactionManager.requesting(blockRequest);
-    await once(transactionManager, JSON.stringify(blockRequest))
+    await this.transactionManager.requesting(blockRequest);
+    await once(this.transactionManager, JSON.stringify(blockRequest))
     //return JSON.parse(value)
   }
 
@@ -54,8 +60,8 @@ class Ruffle extends EventEmitter {
       predicate: predicate,
       id: "ID"
     };
-    await transactionManager.transaction(blockRequest);
-    let value = await once(transactionManager, JSON.stringify(blockRequest))
+    await this.transactionManager.transaction(blockRequest);
+    let value = await once(this.transactionManager, JSON.stringify(blockRequest))
     return value
   }
 
