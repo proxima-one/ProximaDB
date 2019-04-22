@@ -146,11 +146,11 @@ async update(request) {
       let pred = this.createFilter(f);
       return await Curkel.filter(name, pred)
     case "create":
-      return {"Unimplemented"}
+      return "Unimplemented"
     case "load":
-      return {"Unimplemented"}
+      return "Unimplemented"
     default:
-      return {"Incorrect usage"}
+      return "Incorrect usage"
   }
 }
 
