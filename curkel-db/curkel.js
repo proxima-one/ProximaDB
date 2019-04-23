@@ -74,8 +74,8 @@ Get (index, key)
 Returns Proof of inclusion, root
 */
 async function get(index, key) {
-  const p = await proofOfInclusion(index, key)
   const value = await index.get(key)
+  const p = await proofOfInclusion(index, key)
   return {value, p}
 }
 
@@ -182,8 +182,13 @@ async function iterator(tree) {
 Proof of inclusion
 */
 async function proofOfInclusion(snapshot, key) {
-  const proof = await snapshot.prove(key);
-  return proof;
+  try {
+    let proof = await snapshot.prove(key);
+    return proof;
+  } catch {
+    return "Does not exist"
+  }
+
 }
 
 
