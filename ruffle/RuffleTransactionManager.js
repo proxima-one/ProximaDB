@@ -14,7 +14,7 @@ const Curkel = require('curkel-db')
 
 
 const EventEmitter = require('events')
-const once = EventEmitter.once;
+
 
 class RuffleTransactionManager extends EventEmitter {
 
@@ -29,7 +29,7 @@ class RuffleTransactionManager extends EventEmitter {
   }
 
 async requesting(request, sender = null) {
-    let checked = await this.check(request);
+    let checked = await this.check(request); //TODO verify/anchor
     //Check request
     if (checked) {
       const str = JSON.stringify(request);
@@ -85,7 +85,7 @@ pack(bytes) {
     return String.fromCharCode.apply(null, chars);
 }
 
-
+//TODO I think issues arise here
 async check(request) {
   let name = request.name;
   let k = this.unpack(request.key.toString(), 16);
@@ -137,6 +137,7 @@ async update(request) {
   let k = this.unpack(request.key.toString(), 16);
   switch (action) {
     case "put":
+      //check
       let v = this.unpack(JSON.stringify(request.value));
       return await Curkel.put(name, k, v);
     case "get":

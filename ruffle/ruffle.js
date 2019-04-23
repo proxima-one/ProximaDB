@@ -1,14 +1,12 @@
 
 //const require...
 'use strict'
-const bcrypt = require('bcrypt');
-const EventEmitter = require('events')
-const once = EventEmitter.once;
+const bcrypt = require('bcryptjs');
+const EventEmitter = require('events');
+const once = require('events.once');
 const RuffleTransactionManager = require('./RuffleTransactionManager');
 
 class Ruffle extends EventEmitter {
-
-
 
   constructor() {
     super();
@@ -18,7 +16,8 @@ class Ruffle extends EventEmitter {
 
   async request(req) {
     await this.transactionManager.requesting(req);
-    let value = await once(this.transactionManager, JSON.stringify(req))
+    //let value = await once(this.transactionManager, JSON.stringify(req))
+    let value = await once(this.transactionManager, JSON.stringify(req));
     try {
       return JSON.parse(value)
     } catch {
