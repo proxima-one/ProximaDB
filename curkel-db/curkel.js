@@ -35,7 +35,7 @@ async function load(index) {
   try {
     await tree.open();
   } catch (err) {
-    console.log("Database already open")
+    console.log(err)
   }
   return tree
 }

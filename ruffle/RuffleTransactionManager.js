@@ -29,7 +29,7 @@ class RuffleTransactionManager extends EventEmitter {
   }
 
 async requesting(request, sender = null) {
-    let checked = await this.check(request); //TODO verify/anchor
+    let checked = await this.check(request); 
     //Check request
     if (checked) {
       const str = JSON.stringify(request);
@@ -87,6 +87,11 @@ pack(bytes) {
 
 //TODO I think issues arise here
 async check(request) {
+  return true
+}
+
+
+async checkNew(request) {
   let name = request.name;
   let k = this.unpack(request.key.toString(), 16);
   let v = request.value;
@@ -138,8 +143,13 @@ async update(request) {
   switch (action) {
     case "put":
       //check
-      let v = this.unpack(JSON.stringify(request.value));
-      return await Curkel.put(name, k, v);
+      var checked = await this.checkNew(request);
+      if (checked) {
+        let v = this.unpack(JSON.stringify(request.value));
+        return await Curkel.put(name, k, v);
+      } else {
+        return await Curkel.get(name, k);
+      }
     case "get":
       return await Curkel.get(name, k);
     case "filter":
