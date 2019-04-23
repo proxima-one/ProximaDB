@@ -24,7 +24,7 @@ class RuffleTransactionManager extends EventEmitter {
     this.running = false;
     this.reading = false;
     this.response;
-    this.setMaxListeners(0);
+    this.setMaxListeners(0); //TODO this is the issue
     this.count = 1;
   }
 
