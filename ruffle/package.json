@@ -1,6 +1,6 @@
 {
   "name": "ora-ruffle",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "Ruffle authenticated database",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "curkel-db": "*",
+    "curkel-db": "^1.0.8",
     "events": "*",
     "events.once": "^2.0.2"
   }

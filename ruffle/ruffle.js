@@ -39,10 +39,6 @@ class Ruffle extends EventEmitter {
 
 
   async put(table, key, value) {
-    /*
-      Validation
-      useful for filters later
-    */
     let blockRequest = {
       key: key,
       action: 'put',
@@ -51,8 +47,8 @@ class Ruffle extends EventEmitter {
       id: "ID"
     };
     await this.transactionManager.requesting(blockRequest);
-    await once(this.transactionManager, JSON.stringify(blockRequest))
-    //return JSON.parse(value)
+    let v = await once(this.transactionManager, JSON.stringify(blockRequest))
+    return v
   }
 
   async filter(table, predicate) {

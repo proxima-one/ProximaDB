@@ -30,7 +30,7 @@ async function range(indexName, start, finish) {
   const index = await setup(indexName);
   const values = await Curkel.range(index, start, finish);
   await teardown(indexName, index);
-  return values
+  return values;
 }
 
 async function filter(indexName, pred) {

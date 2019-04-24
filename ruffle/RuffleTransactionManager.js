@@ -29,7 +29,7 @@ class RuffleTransactionManager extends EventEmitter {
   }
 
 async requesting(request, sender = null) {
-    let checked = await this.check(request); 
+    let checked = await this.check(request);
     //Check request
     if (checked) {
       const str = JSON.stringify(request);
@@ -137,11 +137,10 @@ This is where the Ora will go
 */
 async update(request) {
   let name = request.name;
-  let action = "get";
-  action = request.action;
+  let action = request.action;
   let k = this.unpack(request.key.toString(), 16);
   switch (action) {
-    case "put":
+    case 'put':
       //check
       var checked = await this.checkNew(request);
       if (checked) {
@@ -150,7 +149,7 @@ async update(request) {
       } else {
         return await Curkel.get(name, k);
       }
-    case "get":
+    case 'get':
       return await Curkel.get(name, k);
     case "filter":
       let f = this.unpack(JSON.stringify(request.predicate));
