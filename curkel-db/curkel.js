@@ -150,7 +150,7 @@ async function range(index, start, finish) {
     }
     count++;
   }
-  console.log(array)
+  //console.log(array)
   return array
 }
 
@@ -165,11 +165,35 @@ async function filter(index, pred) {
         array.push({value: value, proof: proof});
       }
   }
-  console.log(array)
+  //console.log(array)
   return array
 }
 
 
+
+async function getSync(index) {
+  const iter = index.iterator();
+  var array = new Array();
+  while (await iter.next()) {
+      const {key, value} = iter;
+      var proof = await proofOfInclusion(index, key)
+      array.push({key: key, value: value, proof: proof});
+    }
+  }
+  return array
+}
+
+
+
+
+async function synchronize(index, objects) {
+  for (obj in objects) {
+    var proof = await proofOfInclusion(index, key)
+    index
+    array.push({value: value, proof: proof});
+  }
+  return array
+}
 
 /*
 Returns an iterator over a stream

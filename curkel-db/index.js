@@ -40,7 +40,6 @@ async function filter(indexName, pred) {
   return values
 }
 
-
 async function put(indexName, key, value) {
   const index = await setup(indexName);
   const txn = await Curkel.checkout(index);
@@ -48,6 +47,22 @@ async function put(indexName, key, value) {
   await teardown(indexName, index);
   return {root, p}
 }
+
+async function getSync(indexName) {
+  const index = await setup(indexName);
+  const values = await Curkel.synchronize(index, pred);
+  await teardown(indexName, index);
+  return values
+}
+
+async function synchronize(indexName, values) {
+  const index = await setup(indexName);
+  const txn = await Curkel.checkout(index);
+  const {root, p} = await Curkel.put(index, txn, values);
+  await teardown(indexName, index);
+  return {root, p}
+}
+
 
 async function del(indexName, key) {
   const index = await setup(indexName)
