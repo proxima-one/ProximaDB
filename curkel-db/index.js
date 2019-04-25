@@ -58,9 +58,9 @@ async function getSync(indexName) {
 async function synchronize(indexName, values) {
   const index = await setup(indexName);
   const txn = await Curkel.checkout(index);
-  const {root, p} = await Curkel.put(index, txn, values);
+  const root = await Curkel.synchronize(index, txn, values);
   await teardown(indexName, index);
-  return {root, p}
+  return root
 }
 
 
@@ -82,6 +82,8 @@ async function create(indexName) {
 module.exports = {
   create,
   filter,
+  getSync,
+  synchronize,
   del,
   range,
   put,

@@ -183,16 +183,12 @@ async function getSync(index) {
   return array
 }
 
-
-
-
-async function synchronize(index, objects) {
+async function synchronize(index, transaction objects) {
   for (obj in objects) {
-    var proof = await proofOfInclusion(index, key)
-    index
-    array.push({value: value, proof: proof});
+    await transaction.insert(obj.key, obj.value);
   }
-  return array
+  const {root, snapshot} = await commit(index, transaction)
+  return root
 }
 
 /*
@@ -218,6 +214,8 @@ async function proofOfInclusion(snapshot, key) {
 
 module.exports = {
   verify,
+  getSync,
+  synchronize,
   del,
   update,
   put,

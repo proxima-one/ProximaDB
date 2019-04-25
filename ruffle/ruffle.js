@@ -37,7 +37,6 @@ class Ruffle extends EventEmitter {
   }
 
 
-
   async put(table, key, value) {
     let blockRequest = {
       key: key,
