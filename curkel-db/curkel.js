@@ -19,12 +19,35 @@ class Curkel {
 Drop a table
 */
 
+function unpack(str, m = -1) {
+    let n = m;
+    let l = str.length;
+    if (m == -1) {
+      n = l;
+    }
+    var bytes = [];
+    for(var i = 0; i < n; i++) {
+        var char = str.charCodeAt(i%l);
+        bytes.push(char >>> 8, char & 0xFF);
+    }
+    return new Buffer.from(bytes);
+}
 
+
+function pack(bytes) {
+    var chars = [];
+    for(var i = 0, n = bytes.length; i < n;) {
+        chars.push(((bytes[i++] & 0xff) << 8) | (bytes[i++] & 0xff));
+    }
+    return String.fromCharCode.apply(null, chars);
+}
 
 /*
 Config file
 */
 //
+
+
 
 /*
 Create or load index, name
@@ -170,7 +193,7 @@ async function filter(index, pred) {
 }
 
 
-
+/*
 async function getSync(index) {
   const iter = index.iterator();
   var array = new Array();
@@ -190,6 +213,7 @@ async function synchronize(index, transaction objects) {
   const {root, snapshot} = await commit(index, transaction)
   return root
 }
+*/
 
 /*
 Returns an iterator over a stream
@@ -214,8 +238,8 @@ async function proofOfInclusion(snapshot, key) {
 
 module.exports = {
   verify,
-  getSync,
-  synchronize,
+  //getSync,
+  //synchronize,
   del,
   update,
   put,

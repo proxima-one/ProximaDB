@@ -115,8 +115,9 @@ this will take a long time
 */
 createFilter(filterList) {
   let filterFunct = (key, value) => {
-    let v = JSON.parse(pack(value))
-    for (i = 0; i < filterList.length; i++) {
+    let v = JSON.parse(this.pack(value))
+    for (let i = 0; i < filterList.length; i++) {
+      let filter = filterList[i]
       switch (filter['expression']) {
         case ">":
           return v[filter['name']] > filter['value']
@@ -138,10 +139,11 @@ This is where the Ora will go
 async update(request) {
   let name = request.name;
   let action = request.action;
-  let k = this.unpack(request.key.toString(), 16);
+  let k = ""
   switch (action) {
     case 'put':
       //check
+      k = this.unpack(request.key.toString(), 16);
       var checked = await this.checkNew(request);
       if (checked) {
         let v = this.unpack(JSON.stringify(request.value));
@@ -150,11 +152,13 @@ async update(request) {
         return await Curkel.get(name, k);
       }
     case 'get':
+      k = this.unpack(request.key.toString(), 16);
       return await Curkel.get(name, k);
     case "filter":
-      let f = this.unpack(JSON.stringify(request.predicate));
+      let f = request.predicate;
       let pred = this.createFilter(f);
       return await Curkel.filter(name, pred)
+
     case "create":
       return "Unimplemented"
     case "load":

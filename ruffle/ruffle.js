@@ -17,8 +17,13 @@ class Ruffle extends EventEmitter {
   async request(req) {
     await this.transactionManager.requesting(req);
     let value = await once(this.transactionManager, JSON.stringify(req));
+
     try {
-      return JSON.parse(value)
+      value = value[0]
+      for (let i = 0; i < value.length; i++) {
+        value[i].value = JSON.parse(this.pack(value[i].value))
+      }
+      return value
     } catch {
       return value
     }

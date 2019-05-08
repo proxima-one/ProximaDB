@@ -4,7 +4,18 @@
 const Ruffle = require('../index');
 const randomBytes = require('randombytes');
 var ruffle = new Ruffle()
+
+
 async function main() {
+  //console.log("Basic Testing")
+  //await basicTest();
+  //console.log("Range Testing")
+  //await rangeTest();
+  console.log("Filter Testing")
+  await filterTest();
+}
+
+async function basicTest() {
 
   // Create a tree using blake2b-256 and a depth/key-size of 256 bits.
 
@@ -17,7 +28,7 @@ async function main() {
   console.log(n2, n1, n);
 
 
-  for (let j = 0; j < 2000; j++) {
+  for (let j = 0; j < 200; j++) {
       const id = Date.now();
       const k_1 = "supply";
       const k_2 = "blockHash";
@@ -64,7 +75,7 @@ async function main() {
       //console.log("Supply get", r_4)
 
     //  console.log("Epoch put", r_5)
-      console.log("Epoch get", r_6)
+      //console.log("Epoch get", r_6)
     //  console.log("blockHash", r_2)
     //  console.log("epoch", r_3)
   }
@@ -75,50 +86,92 @@ async function main() {
   n2 = d.getMinutes();
   console.log(n2, n1, n);
 
-
-
-/*
-
-  //const ar = await Curkel.range("new_index", 0, 50)
-  var b = randomBytes(100)
-  var n = 10;
-  n = unpack(n.toString(), 16)
-
-  const arr = await Ruffle.filter("new_index", (key, value) => {
-    return key < n || key.equals(n);
-  });
-
 }
 
 
-function unpack(str, m = -1) {
-    let n = m;
-    let l = str.length;
-    if (m == -1) {
-      n = l;
+
+async function setup(x = 200) {
+    //Setup
+    var d = new Date();
+    var n = d.getMilliseconds();
+    var n1 = d.getSeconds();
+    var n2 = d.getMinutes();
+    console.log(n2, n1, n);
+    for (let j = 0; j < x; j++) {
+      let value = {value: j, id: Date.now()}
+      let key = j
+      let req = {
+        name: "testTable",
+        action: 'put',
+        key: key,
+        value: value,
+        id: Date.now()
+      }
+      await ruffle.request(req)
     }
-    var bytes = [];
-    for(var i = 0; i < n; i++) {
-        var char = str.charCodeAt(i%l);
-        bytes.push(char >>> 8, char & 0xFF);
-    }
-    return new Buffer.from(bytes);
+    d = new Date();
+    n = d.getMilliseconds();
+    n1 = d.getSeconds();
+    n2 = d.getMinutes();
+    console.log(n2, n1, n);
+}
+
+async function rangeTest() {
+  await setup();
+  var d = new Date();
+  var n = d.getMilliseconds();
+  var n1 = d.getSeconds();
+  var n2 = d.getMinutes();
+
+  //const ar = await Curkel.range("testTable", 0, 50)
+  console.log(ar)
+  d = new Date();
+  n = d.getMilliseconds();
+  n1 = d.getSeconds();
+  n2 = d.getMinutes();
+  console.log(n2, n1, n);
 }
 
 
-function pack(bytes) {
-    var chars = [];
-    for(var i = 0, n = bytes.length; i < n;) {
-        chars.push(((bytes[i++] & 0xff) << 8) | (bytes[i++] & 0xff));
-    }
-    return String.fromCharCode.apply(null, chars);
+
+async function filterTest() {
+  await setup();
+  var d = new Date();
+  var n = d.getMilliseconds();
+  var n1 = d.getSeconds();
+  var n2 = d.getMinutes();
+  console.log(n2, n1, n);
+
+  let pred = [{
+    name: 'value',
+    expression: '>',
+    value: 10000
+  }]
+  let req = {
+    name: "testTable",
+    action: 'filter',
+    predicate: pred,
+    id: Date.now()
+  }
+
+  const arr = await ruffle.request(req)
+  console.log(arr);
+  d = new Date();
+  n = d.getMilliseconds();
+  n1 = d.getSeconds();
+  n2 = d.getMinutes();
+  console.log(n2, n1, n);
 }
 
 
-async function main1() {
+
+
+
+
+async function iterateTest() {
 
   // Create a tree using blake2b-256 and a depth/key-size of 256 bits.
-  const tree = await Curkel.setup("new_index");
+  const tree = await Curkel.setup("testTable");
 
   const iter = tree.iterator();
 
@@ -130,8 +183,7 @@ async function main1() {
   }
 }
 
-*/
-}
+
 
 
 //main();
