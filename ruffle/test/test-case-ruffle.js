@@ -90,7 +90,7 @@ async function basicTest() {
 
 
 
-async function setup(x = 200) {
+async function setup(x = 20) {
     //Setup
     var d = new Date();
     var n = d.getMilliseconds();
