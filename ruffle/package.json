@@ -1,10 +1,10 @@
 {
   "name": "ora-ruffle",
-  "version": "1.0.19",
+  "version": "1.0.16",
   "description": "Ruffle authenticated database",
   "main": "index.js",
   "scripts": {
-    "test": "node test/test-case-ruffle.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "ruffle"
@@ -13,7 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "curkel-db": "^1.0.12",
+    "curkel-db": "^1.0.8",
     "events": "*",
     "events.once": "^2.0.2"
   }
