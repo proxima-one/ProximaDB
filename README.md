@@ -23,6 +23,32 @@ The main points for the repository/what it provide
 
 
 
+## Documentation
+<!--
+This should include:
+- Tutorial
+- Main Concepts
+- API Guide
+- Support
+-->
+
+Check out the [Getting Started]() doc for a quick overview.
+
+The documentation is divided into several sections:
+
+* [Tutorial]()
+* [Main Concepts]()
+* [API Reference]()
+* [Where to Get Support]()
+* [Contributing Guide]()
+
+<!--
+## Examples
+This should include:
+Some examples for people
+
+-->
+
 
 ## Contributing
 
