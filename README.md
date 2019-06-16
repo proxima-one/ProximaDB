@@ -13,4 +13,4 @@ When these are combined we create a powerful nosql database that can be authenti
 
 # Demo 
 
-Check out our demo of the functionality of the database and further documentation in the Ruffle folder.
+Check out our demo of the functionality of the database and further documentation.
