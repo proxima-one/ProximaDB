@@ -205,7 +205,7 @@ async function proofOfInclusion(snapshot, key) {
   try {
     let proof = await snapshot.prove(key);
     return proof;
-  } catch {
+  } catch (err)  {
     return "Does not exist"
   }
 
