@@ -17,7 +17,7 @@ async function main() {
   //console.log(n2, n1, n);
 
 
-  for (let j = 0; j < 2000; j++) {
+  for (let j = 0; j < 200; j++) {
       const id = Date.now();
       const k_1 = "supply";
       const k_2 = "blockHash";
