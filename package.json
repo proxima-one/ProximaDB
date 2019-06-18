@@ -4,7 +4,6 @@
   "description": "ProximaDB authenticated database",
   "main": "index.js",
   "scripts": {
-    
     "test": "node test/test-case-ruffle.js"
   },
   "keywords": [
