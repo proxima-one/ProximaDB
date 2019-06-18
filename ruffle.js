@@ -19,7 +19,7 @@ class Ruffle extends EventEmitter {
     let value = await once(this.transactionManager, JSON.stringify(req));
     try {
       return JSON.parse(value)
-    } catch {
+    } catch (err) {
       return value
     }
   }
@@ -62,9 +62,6 @@ class Ruffle extends EventEmitter {
     return value
   }
 
-/*
-TODO
-*/
   async create(table, schema, args = {}) {
     //create table
     let blockRequest = {
