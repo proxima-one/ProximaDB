@@ -4,7 +4,7 @@
 const Ruffle = require('../index');
 const randomBytes = require('randombytes');
 var ruffle = new Ruffle()
-function main() {
+async function main() {
 
   // Create a tree using blake2b-256 and a depth/key-size of 256 bits.
 
