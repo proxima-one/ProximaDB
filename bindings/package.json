@@ -1,0 +1,21 @@
+{
+  "name": "curkel",
+  "version": "1.0.2",
+  "description": "Curkel Server-Client",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "curkel"
+  ],
+  "author": "chase",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypto": "*",
+    "curkel-db": "*",
+    "grpc": "*",
+    "urkel": "*"
+  }
+}

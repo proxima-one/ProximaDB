@@ -1,0 +1,60 @@
+
+syntax = "proto3";
+
+service CurkelService {
+
+  rpc Get (GetRequest) returns (GetResponse) {}
+  rpc Put (PutRequest) returns (PutResponse) {}
+  rpc Del (DeleteRequest) returns (DeleteResponse) {}
+  rpc Create (DatasetRequest) returns (DatasetResponse) {}
+}
+
+message DatasetRequest {
+  string name = 1;
+}
+
+message DatasetResponse {
+  bool confirmation = 1;
+  string name = 2;
+}
+
+message GetRequest {
+  string name = 1;
+  bytes key = 2;
+}
+
+message DeleteRequest {
+  string name = 1;
+  bytes key = 2;
+}
+
+message PutRequest {
+  string name = 1;
+  bytes key = 2;
+  bytes value = 3;
+}
+
+message DeleteResponse {
+  bytes value = 1;
+  bytes proof = 2;
+  bytes root = 3;
+}
+
+message PutResponse {
+ bytes proof = 1;
+ bytes root = 2;
+}
+
+
+message GetResponse {
+ bytes value = 1;
+ bytes proof = 2;
+ bytes root = 3;
+}
+
+message Root {
+  bytes root = 1;
+}
+message Proof {
+  bytes proof = 1;
+}
