@@ -5,13 +5,13 @@
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/facebook/react/blob/master/LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://reactjs.org/docs/how-to-contribute.html#your-first-pull-request)
 
-The authenticatd data structures within this repo are integral. They feature several components: 
+The authenticated data structures within this repo are integral. They feature several components: 
 
-- Authenticated Data store 
+- Authenticated Data store
 - Transaction Manager
-- Query Operator 
+- Query Operator
 
-When these are combined we create a powerful nosql database that can be authenticated through its merkle proof. 
+When these are combined we create a powerful nosql database that can be authenticated through its merkle proof.
 
 
 <!--
