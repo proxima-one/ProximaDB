@@ -1,0 +1,20 @@
+{
+  "name": "proxima-db",
+  "version": "0.0.01",
+  "description": "ProximaDB authenticated database",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/test-case-ruffle.js"
+  },
+  "keywords": [
+    "proxima"
+  ],
+  "author": "chase",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "curkel-db": "^1.0.8",
+    "events": "*",
+    "events.once": "^2.0.2"
+  }
+}
