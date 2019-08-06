@@ -5,7 +5,9 @@
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/facebook/react/blob/master/LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://reactjs.org/docs/how-to-contribute.html#your-first-pull-request)
 
-The authenticated data structures within this repo are integral. They feature several components: 
+
+The authenticated data structures within this repo are integral. They feature several components:
+
 
 - Authenticated Data store
 - Transaction Manager
