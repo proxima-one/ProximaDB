@@ -14,7 +14,7 @@ async function main() {
   var n = d.getMilliseconds();
   var n1 = d.getSeconds();
   var n2 = d.getMinutes();
-  //console.log(n2, n1, n);
+  console.log(n2, n1, n);
 
 
   for (let j = 0; j < 200; j++) {
@@ -63,17 +63,17 @@ async function main() {
       //console.log("Supply put", r_1)
       //console.log("Supply get", r_4)
 
-    //  console.log("Epoch put", r_5)
-      //console.log("Epoch get", r_6)
-    //  console.log("blockHash", r_2)
-    //  console.log("epoch", r_3)
+    //console.log("Epoch put", r_5)
+    //console.log("Epoch get", r_6)
+    //console.log("blockHash", r_2)
+    //console.log("epoch", r_3)
   }
 
   d = new Date();
   n = d.getMilliseconds();
   n1 = d.getSeconds();
   n2 = d.getMinutes();
-  //console.log(n2, n1, n);
+  console.log(n2, n1, n);
 
 
 

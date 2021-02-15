@@ -179,7 +179,6 @@ async function getSync(index) {
       var proof = await proofOfInclusion(index, key)
       array.push({key: key, value: value, proof: proof});
     }
-  }
   return array
 }
 

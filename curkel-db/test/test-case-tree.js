@@ -28,18 +28,23 @@ async function main() {
   var n2 = d.getMinutes();
   console.log(n2, n1, n);
 
-  for (let j = 0; j < 100000; j++) {
+  for (let j = 0; j < 100; j++) {
     const txn = tree.transaction();
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < 44000; i++) {
       const k = randomBytes(32);
       const v = randomBytes(300);
       await txn.insert(k, v);
-      key = k;
-      const root = await txn.commit();
-      const snapshot = tree.snapshot(root);
-      const proof = await snapshot.prove(key);
-    }
+      //key = k;
 
+      //const snapshot = tree.snapshot(root);
+      //const proof = await snapshot.prove(key);
+    }
+    const root = await txn.commit();
+    d = new Date();
+    n = d.getMilliseconds();
+    n1 = d.getSeconds();
+    n2 = d.getMinutes();
+    console.log(n2, n1, n);
 
 
 
