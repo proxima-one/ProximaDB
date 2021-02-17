@@ -25,23 +25,32 @@ The main points for the repository/what it provide
 
 ## Installation
 ```
-npm install ora-ruffle
+npm install proxima-db
 ```
 ## Testing
 
 ```
-
+npm test
 ```
 
 ## Benchmarking
+```
+npm benchmark [args]
+```
+
+- benchmark type
+- benchmark number
+- key size
+- value size
+- output (output file)
 
 
 ## Documentation
 
 Importing
 ```javascript
-const Ruffle = require('ora-ruffle')
-var ruffle = new Ruffle()
+const ProximaDB = require('proxima-db')
+var db = new ProximaDB()
 ```
 
 Creating a table for transactions
@@ -53,7 +62,7 @@ let schema = {
   to: 'string',
   amount: 'uint'
 }
-var transactions = ruffle.create(table, schema)
+var transactions = db.create(table, schema)
 ```
 
 Load table for transactions
@@ -65,7 +74,7 @@ let schema = {
   to: 'string',
   amount: 'uint'
 }
-var transactions = ruffle.create(table, schema)
+var transactions = db.create(table, schema)
 ```
 
 Put key into db
@@ -77,7 +86,7 @@ let transaction = {
   to: 'address2',
   amount: 20000
 }
-ruffle.put(transactions, key, value)
+db.put(transactions, key, value)
 ```
 
 The put command returns a proof and value, or an error.
@@ -89,7 +98,7 @@ Proof {
 
 Get item from the table
 ```javascript
-ruffle.get(transactions, key)
+db.get(transactions, key)
 ```
 
 ```console
@@ -101,7 +110,7 @@ ruffle.get(transactions, key)
 let pred = {
   account: "key"
 }
-ruffle.filter(transactions, pred)
+db.filter(transactions, pred)
 ```
 
 
@@ -110,10 +119,7 @@ ruffle.filter(transactions, pred)
 ```
 
 
-## Documentation
-
-
-### CRUD Operations
+### Operations
 
 #### Create
 
@@ -130,7 +136,7 @@ let schema = {
   balance: 'uint'
   account: 'string'
 }
-var transactions = ruffle.create(table, schema)
+var transactions = db.create(table, schema)
 ```
 
 #### Put
@@ -149,7 +155,7 @@ let value = {
   account: key,
   value: 1000
 }
-ruffle.put(transactions, key, value)
+db.put(transactions, key, value)
 ```
 
 
@@ -162,7 +168,7 @@ ruffle.put(transactions, key, value)
 Gets a value corresponding to the key, within the tableName.
 
 ```javascript
-ruffle.get(transactions, key)
+db.get(transactions, key)
 ```
 
 
@@ -198,7 +204,7 @@ Each filter can be shown as a combination of three variables.
 let filter = [{
  name: "name", expression: "=", value: "hello"
 }]
-ruffle.filter(transactions, filter)
+db.filter(transactions, filter)
 ```
 
 #### Output
@@ -206,18 +212,6 @@ ruffle.filter(transactions, filter)
 ```console
 
 ```
-
-
-## Future Work
-
-Future work on this library:
-
-- Schema Validation
-- Optimized range queries
-- Integrating mapping, and aggregation functions
-- Query optimization
-- Addition of developer-based authenticated updates
-
 
 
 ## Contributing

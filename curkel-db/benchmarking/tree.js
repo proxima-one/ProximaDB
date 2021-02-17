@@ -31,9 +31,9 @@ switch (argv[2]) {
     break;
 }
 
-const BLOCKS = +argv[3] || 10000;
-const PER_BLOCK = +argv[4] || 300;
-const INTERVAL = +argv[5] || 72;
+const BLOCKS = +argv[3] || 100;
+const PER_BLOCK = +argv[4] || 44000;
+const INTERVAL = +argv[5] || 5;
 const TOTAL = BLOCKS * PER_BLOCK;
 const FILE = Path.resolve(__dirname, 'treedb');
 
@@ -41,10 +41,28 @@ function verify(root, key, proof) {
   return proof.verify(root, key, blake2b, 256);
 }
 
+//block checks
+async function doCompaction(tree) {
+  //print the database size
+  //print the number of roots
+  //print the number of values
+  const now = util.now();
+  console.log("Compaction")
+  await tree.compact()
+  console.log('Compaction: %d.ms', util.now() - now);
+}
+
+async function doCommit(batch) {
+  const now = util.now();
+  await batch.commit();
+  console.log('Commit: %d.ms', util.now() - now);
+}
+
+
 async function stress(prefix) {
   const tree = new Tree(blake2b, 256, prefix);
   const store = tree.store;
-
+  store.root
   await tree.open();
 
   {
@@ -81,7 +99,7 @@ async function stress(prefix) {
 
     for (let j = 0; j < PER_BLOCK; j++) {
       const k = crypto.randomBytes(tree.bits >>> 3);
-      const v = crypto.randomBytes(300);
+      const v = crypto.randomBytes(200);
 
       pairs.push([k, v]);
     }
@@ -93,8 +111,10 @@ async function stress(prefix) {
         await batch.insert(k, v);
 
       batch.rootHash();
-
-      console.log('Insertion: %d', util.now() - now);
+      let t = util.now() - now
+      console.log('Total Insertions: %d', PER_BLOCK*(i+1))
+      console.log('Insertion Time: %dms, Insertions: %d', t, PER_BLOCK);
+      console.log("Insertions per second: %d", 1000 * PER_BLOCK/t)
     }
 
     const [key, value] = pairs.pop();
@@ -111,12 +131,16 @@ async function stress(prefix) {
 
       await batch.commit();
 
-      console.log('Commit: %d', util.now() - now);
+      console.log('Commit: %dms', util.now() - now);
+      let stats = await store.stat()
       console.log('WB Size: %dmb', store.buffer.data.length / 1024 / 1024);
+      console.log('DB Size: %dmb', stats.size/ 1000 / 1000);
 
       util.logMemory();
 
       await doProof(tree, i, key, value);
+
+      //await doCompaction(tree)
     }
 
     if ((i % 100) === 0)
@@ -134,7 +158,7 @@ async function doProof(tree, i, key, expect) {
   const now = util.now();
   const proof = await tree.prove(key);
 
-  console.log('Proof %d time: %d.', i, util.now() - now);
+  console.log('Proof %d, generation time: %d.ms', i, util.now() - now);
 
   let size = 0;
   if (proof.nodes.length > 0) {
@@ -148,13 +172,14 @@ async function doProof(tree, i, key, expect) {
   }
 
   size += proof.value.length;
-
+  const start = util.now();
   const [code, value] = verify(tree.rootHash(), key, proof);
+  console.log('Proof %d, verification time: %d.ms', i, util.now() - start);
 
   assert.strictEqual(code, 0);
   assert.notStrictEqual(value, null);
   assert(Buffer.isBuffer(value));
-  assert.strictEqual(value.length, 300);
+  assert.strictEqual(value.length, 200);
   assert.bufferEqual(value, expect);
 
   console.log('Proof %d depth: %d', i, proof.depth);
@@ -186,7 +211,9 @@ async function bench(prefix) {
     for (const [key, value] of items)
       await batch.insert(key, value);
 
-    console.log('Insert: %d.', util.now() - now);
+    let t = util.now() - now
+    console.log('Insert: %d.ms', t);
+    console.log("Insertions per second: %d", 1000 * 100000/t)
   }
 
   {
@@ -194,8 +221,9 @@ async function bench(prefix) {
 
     for (const [key] of items)
       assert(await batch.get(key));
-
-    console.log('Get (cached): %d.', util.now() - now);
+    let t = util.now() - now
+    console.log('Get (cached): %d.ms', t);
+    console.log("Get(cached) per second: %d", 1000 * 100000/t)
   }
 
   {
@@ -203,7 +231,7 @@ async function bench(prefix) {
 
     await batch.commit();
 
-    console.log('Commit: %d.', util.now() - now);
+    console.log('Commit: %d.ms', util.now() - now);
   }
 
   await tree.close();
@@ -214,8 +242,9 @@ async function bench(prefix) {
 
     for (const [key] of items)
       assert(await tree.get(key));
-
-    console.log('Get (uncached): %d.', util.now() - now);
+    let t = util.now() - now
+    console.log('Get (uncached): %d.ms', t);
+    console.log("Get(uncached) per second: %d", 1000 * 100000/t)
   }
 
   batch = tree.batch();
@@ -230,7 +259,9 @@ async function bench(prefix) {
         await batch.remove(key);
     }
 
-    console.log('Remove: %d.', util.now() - now);
+    let t = util.now() - now
+    console.log('Remove: %d.ms', t);
+    console.log("Removes per second: %d", 1000 * 100000/t)
   }
 
   {
@@ -238,7 +269,7 @@ async function bench(prefix) {
 
     await batch.commit();
 
-    console.log('Commit: %d.', util.now() - now);
+    console.log('Commit: %d.ms', util.now() - now);
   }
 
   {
@@ -246,7 +277,7 @@ async function bench(prefix) {
 
     await batch.commit();
 
-    console.log('Commit (nothing): %d.', util.now() - now);
+    console.log('Commit (nothing): %d.ms', util.now() - now);
   }
 
   await tree.close();
@@ -263,7 +294,7 @@ async function bench(prefix) {
 
       proof = await tree.prove(key);
 
-      console.log('Proof: %d.', util.now() - now);
+      console.log('Proof: %d.ms', util.now() - now);
     }
 
     {
@@ -271,7 +302,8 @@ async function bench(prefix) {
       const [code, value] = verify(root, key, proof);
       assert(code === 0);
       assert(value);
-      console.log('Verify: %d.', util.now() - now);
+      //verify
+      console.log('Verify: %d.ms', util.now() - now);
     }
   }
 

@@ -7,6 +7,14 @@ Benchmarking Needs
 //storage usage
 
 
+
+Size of Key
+Size of Value
+Number of Key, Values (size)
+Batch size
+Number of Batches
+
+
 //inserts
   //batches (different sizes)
   //ordered/unordered
