@@ -230,6 +230,25 @@ Proof verification and generation remain at constant levels, with even the size 
 *All benchmarks were conducted using the given hardware, and the given key sizes. Updates and operations are given as averages after the listed number of values has been inserted.*
 
 
+
+![](benchmark_specs.png)
+
+
+![](benchmark_data.png)
+
+
+
+
+**Notice.** *The difference between cached and uncached gets shows the true difference between memory and disk time. It is for this reason that we are looking at the scaling of the DB as it moves from memory to disk.*
+
+
+![](benchmark_proof.png)
+
+
+**Notice.** *The generation time, verification time for proofs was measured once because the sizing and depth of the radix trie (the indexing structure), increases logarithmically with regards to the number of values inserted.*
+
+
+
 ## Contributing
 
 
